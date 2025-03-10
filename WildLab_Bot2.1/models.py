@@ -29,13 +29,19 @@ class Review(Base):
     comment = Column(Text)
     pros = Column(Text)
     cons = Column(Text)
-    photo_url = Column(Text)
+    photo_url = Column(Boolean, default=False)  # Флаг наличия фото
+    photo_urls = Column(Text)  # JSON-строка с URL фотографий
     response = Column(Text)
     is_answered = Column(Boolean, default=False)
 
+    # Информация о продукте
+    product_name = Column(Text)
+    product_id = Column(String(50))
+    supplier_article = Column(String(50))
+    subject_name = Column(Text)  # Добавлено поле для типа товара
+
     # Связь с пользователем
     user = relationship("UserSettings", back_populates="reviews")
-
 
 # Инициализация базы данных
 engine = create_engine('sqlite:///bot.db')
